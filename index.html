@@ -8,6 +8,45 @@
 		<title>Create post component</title>
 	</head>
 	<body>
+		<section>
+			<article class="post">
+				<div class="post__wrapper">
+					<header class="post__header">
+						<img class="post__avatar" src="avatar.png" alt="John Doe" />
+
+						<div class="post__meta">
+							<p class="post__user">John Doe</p>
+							<time class="post__time" datetime="2018-07-26T11:14">July 26 2018, 11:14am</time>
+						</div>
+					</header>
+
+					<div class="post__body">
+						<p class="post__text">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam corrupti asperiores modi odio vero. Veritatis modi reiciendis quibusdam molestiae! Esse!
+						</p>
+						<img class="post__img" src="post-1.png" alt="" />
+					</div>
+				</div>
+
+				<footer class="post__footer">
+					<div class="post__footer-wrapper">
+						<button class="post__react-btn">
+							<img class="post__react-btn-icon" src="thumb-up-outline.svg" alt="" />
+							React
+						</button>
+						<button class="post__react-btn">
+							<img class="post__react-btn-icon" src="comment-multiple-outline.svg" alt="" />
+							Comment
+						</button>
+						<button class="post__react-btn">
+							<img class="post__react-btn-icon" src="share-outline.svg" alt="" />
+							Share
+						</button>
+					</div>
+				</footer>
+			</article>
+		</section>
+
 		<script src="main.js"></script>
 	</body>
 </html>

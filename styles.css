@@ -1,5 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+	--primary-font: 'Roboto', sans-serif;
+	--secondary-font: 'Montserrat', sans-serif;
+}
+
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+}
+
+body {
+	background-color: #f4f4f4;
+	font-family: var(--primary-font);
+	font-size: 100%;
+}
+
+img {
+	vertical-align: top;
+}
+
+/* Post */
+.post {
+	width: 95%;
+	max-width: 660px;
+	margin: 0 auto;
+	background-color: #fff;
+}
+
+.post__header {
+	display: flex;
+	gap: 15px;
+	margin-bottom: 25px;
+}
+
+.post__avatar {
+	max-width: 40px;
+	min-height: 40px;
+}
+
+.post__wrapper {
+	padding: 20px 40px;
+}
+
+.post__user {
+	font-family: var(--secondary-font);
+	font-weight: bold;
+	font-size: 14px;
+	color: #51595e;
+}
+
+.post__time {
+	font-size: 12px;
+	color: #999999;
+}
+
+.post__text {
+	font-size: 16px;
+	color: #757a91;
+	line-height: 1.5;
+	margin-bottom: 20px;
+}
+
+.post__img {
+	width: 100%;
+}
+
+.post__footer {
+	border-top: 1px solid #edf7fb;
+	background-color: rgba(237, 247, 251, 25%);
+}
+
+.post__footer-wrapper {
+	padding: 15px 40px;
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+}
+
+.post__react-btn {
+	background: none;
+	border: none;
+	font-family: var(--secondary-font);
+	color: #647589;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.post__react-btn-icon {
+	width: 18px;
+	height: 18px;
+	margin-right: 5px;
 }
