@@ -21,6 +21,97 @@ img {
 	vertical-align: top;
 }
 
+/* Create post */
+.create-post {
+	background-color: #fff;
+	padding: 20px 40px;
+	width: 95%;
+	max-width: 660px;
+	margin: 0 auto;
+	/*  */
+	margin-bottom: 100px;
+	display: flex;
+	gap: 20px;
+	align-items: start;
+}
+
+.create-post__avatar {
+	max-width: 40px;
+	min-height: 40px;
+}
+
+.create-post__form {
+	display: inline-block;
+	width: 100%;
+}
+
+/* Dynamic height for text-area:
+https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
+.create-post__text-wrap {
+	display: grid;
+	margin-bottom: 20px;
+}
+
+.create-post__text-wrap::after {
+	content: attr(data-replicated-value) ' ';
+	white-space: pre-wrap;
+	visibility: hidden;
+}
+
+.create-post__text-wrap > textarea {
+	min-height: 70px;
+	font-size: 16px;
+	color: #757a91;
+	resize: none;
+	overflow: hidden;
+}
+
+.create-post__text-wrap > textarea::placeholder {
+	color: #999999;
+}
+
+.create-post__text-wrap > textarea,
+.create-post__text-wrap::after {
+	border: none;
+	font: inherit;
+	grid-area: 1 / 1 / 2 / 2;
+	line-height: 1.5;
+	word-break: break-all;
+}
+
+.create-post__media-wrap {
+	margin-bottom: 20px;
+}
+
+.create-post__media-item {
+	width: 100%;
+	max-width: 140px;
+	position: relative;
+}
+
+.create-post__media-item button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #fff;
+	border: none;
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.create-post__media-item img {
+	width: 100%;
+}
+
+#create-post-media {
+	display: none;
+}
+
+.create-post__buttons-wrap {
+	display: flex;
+	justify-content: space-between;
+}
+
 /* Post */
 .post {
 	width: 95%;
@@ -78,10 +169,18 @@ img {
 	grid-template-columns: repeat(3, auto);
 }
 
-.post__react-btn {
+/* Buttons */
+.post__react-btn,
+.create-post__opt-btn,
+.create-post__submit {
 	background: none;
-	border: none;
+	display: inline-flex;
+	align-items: center;
+}
+
+.post__react-btn {
 	font-family: var(--secondary-font);
+	border: none;
 	color: #647589;
 	font-weight: 500;
 	font-size: 14px;
@@ -91,4 +190,23 @@ img {
 	width: 18px;
 	height: 18px;
 	margin-right: 5px;
+}
+
+.create-post__opt-btn {
+	border: 1px solid rgba(100, 117, 137, 0.1);
+	padding: 5px 15px;
+	color: #647589;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.create-post__submit {
+	background-color: #5596e6;
+	border: 1px solid transparent;
+	border: none;
+	color: #fff;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 5px 15px;
 }
