@@ -1,5 +1,7 @@
 let createPostForm = document.querySelector('#create-post-form');
 let createPostMedia = document.querySelector('#create-post-media');
+let createPostText = document.querySelector('#create-post-txt');
+let createPostSubmitBtn = document.querySelector('#create-post-submit-btn');
 let mediaLabel = document.querySelector('[for="create-post-media"]');
 let postsContainer = document.querySelector('#posts-container');
 
@@ -9,7 +11,27 @@ mediaLabel.addEventListener('keypress', (e) => {
 	}
 });
 
+createPostForm.addEventListener('submit', handleSubmit, false);
 createPostMedia.addEventListener('input', handleAddImg, false);
+
+createPostText.addEventListener('input', watchInputs, false);
+createPostMedia.addEventListener('change', watchInputs, false);
+
+function watchInputs() {
+	if (createPostText.value === '' && createPostMedia.value === '') {
+		createPostSubmitBtn.setAttribute('disabled', 'true');
+		createPostForm.removeEventListener('submit', handleSubmit, false);
+	} else {
+		createPostSubmitBtn.removeAttribute('disabled');
+		createPostForm.addEventListener('submit', handleSubmit, false);
+	}
+}
+
+watchInputs();
+
+function handleSubmit(e) {
+	e.preventDefault();
+}
 
 function handleAddImg(e) {
 	const file = e.target.files[0];
@@ -44,6 +66,7 @@ function generateImgPreview(file) {
 function removeImg(e) {
 	e.currentTarget.parentElement.remove();
 	createPostMedia.value = '';
+	watchInputs();
 }
 
 function isValidImage(file) {

@@ -15,7 +15,7 @@
 					<textarea
 						aria-label="Write something about you..."
 						name="post-text"
-						id=""
+						id="create-post-txt"
 						onInput="this.parentNode.dataset.replicatedValue = this.value"
 						placeholder="Write something about you..."
 					></textarea>
@@ -29,7 +29,7 @@
 						Media
 						<input type="file" name="post-img" id="create-post-media" accept=".png, .jpg, .jpeg" />
 					</label>
-					<button class="create-post__submit" type="submit">Publish</button>
+					<button class="create-post__submit" type="submit" disabled id="create-post-submit-btn">Publish</button>
 				</div>
 			</form>
 		</section>

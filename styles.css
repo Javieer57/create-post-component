@@ -176,6 +176,7 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	background: none;
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 }
 
 .post__react-btn {
@@ -186,6 +187,7 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	font-size: 14px;
 }
 
+/* Apply styles to all icons */
 .post__react-btn-icon {
 	width: 18px;
 	height: 18px;
@@ -209,4 +211,8 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	font-size: 12px;
 	font-weight: 500;
 	padding: 5px 15px;
+}
+
+.create-post__submit:disabled {
+	background-color: rgb(186, 235, 255);
 }
