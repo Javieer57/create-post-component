@@ -10,37 +10,31 @@
 	<body>
 		<section class="create-post">
 			<img class="create-post__avatar" src="avatar.png" alt="" />
-			<form class="create-post__form" action="">
+			<form id="create-post-form" class="create-post__form" action="">
 				<div class="create-post__text-wrap">
 					<textarea
 						aria-label="Write something about you..."
-						name=""
+						name="post-text"
 						id=""
 						onInput="this.parentNode.dataset.replicatedValue = this.value"
 						placeholder="Write something about you..."
 					></textarea>
 				</div>
 
-				<div class="create-post__media-wrap">
-					<figure class="create-post__media-item">
-						<button type="button" aria-label="delete image"><img src="close.svg" alt="" /></button>
-						<img src="post-1.png" alt="" />
-					</figure>
-				</div>
+				<div class="create-post__media-wrap" id="create-post-media-wrap"></div>
 
 				<div class="create-post__buttons-wrap">
-					<!-- Add keyboard event -->
-					<label onkeydown="this.click()" aria-label="Add an image to the post" tabindex="0" class="create-post__opt-btn" for="create-post-media">
+					<label aria-label="Add an image to the post" tabindex="0" class="create-post__opt-btn" for="create-post-media">
 						<img class="post__react-btn-icon" src="camera-outline.svg" alt="" />
 						Media
-						<input type="file" name="" id="create-post-media" accept="png, .jpg, .jpeg" />
+						<input type="file" name="post-img" id="create-post-media" accept=".png, .jpg, .jpeg" />
 					</label>
 					<button class="create-post__submit" type="submit">Publish</button>
 				</div>
 			</form>
 		</section>
 
-		<section>
+		<section id="posts-container">
 			<article class="post">
 				<div class="post__wrapper">
 					<header class="post__header">
