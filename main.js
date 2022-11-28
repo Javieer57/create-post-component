@@ -29,8 +29,138 @@ function watchInputs() {
 
 watchInputs();
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
 	e.preventDefault();
+
+	let postContent = {
+		text: createPostText.value,
+		img: createPostMedia.files[0],
+	};
+
+	let post = await createPost(postContent);
+	cleanCreatePost();
+	postsContainer.insertAdjacentHTML('afterbegin', post);
+}
+
+function cleanCreatePost() {
+	createPostText.value = '';
+	createPostMedia.value = '';
+	watchInputs();
+}
+
+async function createPost(postContent) {
+	let header = generateHeader();
+	let body = await generateBody(postContent);
+	let footer = generateFooter();
+
+	let post = `
+		<article class="post">
+			<div class="post__wrapper">
+				${header}
+				${body}
+			</div>
+			${footer}
+		</article>
+	`;
+
+	return post;
+}
+
+async function generateBody(postContent) {
+	let bodyContent = await generateBodyContent(postContent);
+
+	let body = `
+		<div class="post__body">
+			${bodyContent}
+		</div>
+	`;
+
+	return body;
+}
+
+async function generateBodyContent(postContent) {
+	// https://benhoyt.com/writings/dont-sanitize-do-escape/
+	let content = '';
+
+	if (postContent.text) {
+		content += `
+			<p class="post__text">
+				${postContent.text}
+			</p>
+		`;
+	}
+
+	if (postContent.img) {
+		content += await generatePostImg(postContent.img);
+	}
+
+	return content;
+}
+
+function generatePostImg(fileImg) {
+	// https://codepen.io/Anveio/pen/XzYBzX
+	let reader = new FileReader();
+
+	return new Promise((resolve, reject) => {
+		reader.onerror = () => {
+			reader.abort();
+			reject(new DOMException('Problem parsing input file.'));
+		};
+
+		reader.onload = () => {
+			resolve(`<img class="post__img" src="${reader.result}" alt="" />`);
+		};
+		reader.readAsDataURL(fileImg);
+	});
+}
+
+function generateHeader() {
+	// https://observablehq.com/@mbostock/date-formatting
+	let date = new Date(),
+		currentDate = date.toLocaleString(undefined, {
+			month: 'short',
+			day: '2-digit',
+			year: 'numeric',
+			hour: 'numeric',
+			minute: '2-digit',
+			hour12: true,
+		});
+
+	let header = `
+		<header class="post__header">
+			<img class="post__avatar" src="avatar.png" alt="" />
+
+			<div class="post__meta">
+				<p class="post__user"></p>
+				<time class="post__time" datetime="">${currentDate}</time>
+			</div>
+		</header>
+	`;
+
+	return header;
+}
+
+function generateFooter() {
+	let footer = `
+		<footer class="post__footer">
+			<div class="post__footer-wrapper">
+				<button class="post__react-btn">
+					<img class="post__react-btn-icon" src="thumb-up-outline.svg" alt="" />
+					React
+				</button>
+				<button class="post__react-btn">
+					<img class="post__react-btn-icon" src="comment-multiple-outline.svg" alt="" />
+					Comment
+				</button>
+				<button class="post__react-btn">
+					<img class="post__react-btn-icon" src="share-outline.svg" alt="" />
+					Share
+				</button>
+			</div>
+		</footer>
+	`;
+
+	return footer;
 }
 
 function handleAddImg(e) {
