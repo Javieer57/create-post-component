@@ -4,6 +4,7 @@ let createPostText = document.querySelector('#create-post-txt');
 let createPostSubmitBtn = document.querySelector('#create-post-submit-btn');
 let mediaLabel = document.querySelector('[for="create-post-media"]');
 let postsContainer = document.querySelector('#posts-container');
+let mediaContainer = document.querySelector('#create-post-media-wrap');
 
 mediaLabel.addEventListener('keypress', (e) => {
 	if (e.key === 'Enter') {
@@ -27,8 +28,38 @@ function watchInputs() {
 	}
 }
 
+function generateImgPreview(file) {
+	let reader = new FileReader();
+
+	reader.readAsDataURL(file);
+	reader.onloadend = () => {
+		let preview = `
+			<figure class="create-post__media-item">
+				<button type="button" aria-label="delete image">
+					<img src="close.svg" alt="" />
+				</button>
+				<img src="${reader.result}" alt="" />
+			</figure>	
+		`;
+
+		mediaContainer.innerHTML = preview;
+
+		let closeBtn = mediaContainer.querySelector('button');
+		closeBtn.addEventListener('click', removeCreatePostImg, false);
+	};
+}
+
+function handleAddImg(e) {
+	const file = e.target.files[0];
+
+	if (isValidImage(file)) {
+		generateImgPreview(file);
+	}
+}
+
 watchInputs();
 
+/* Generate post functions */
 async function handleSubmit(e) {
 	e.preventDefault();
 
@@ -38,14 +69,8 @@ async function handleSubmit(e) {
 	};
 
 	let post = await createPost(postContent);
-	cleanCreatePost();
 	postsContainer.insertAdjacentHTML('afterbegin', post);
-}
-
-function cleanCreatePost() {
-	createPostText.value = '';
-	createPostMedia.value = '';
-	watchInputs();
+	cleanCreatePost();
 }
 
 async function createPost(postContent) {
@@ -66,6 +91,32 @@ async function createPost(postContent) {
 	return post;
 }
 
+function generateHeader() {
+	// https://observablehq.com/@mbostock/date-formatting
+	let date = new Date(),
+		currentDate = date.toLocaleString(undefined, {
+			month: 'short',
+			day: '2-digit',
+			year: 'numeric',
+			hour: 'numeric',
+			minute: '2-digit',
+			hour12: true,
+		});
+
+	let header = `
+		<header class="post__header">
+			<img class="post__avatar" src="avatar.png" alt="John Doe" />
+
+			<div class="post__meta">
+				<p class="post__user">John Doe</p>
+				<time class="post__time" datetime="">${currentDate}</time>
+			</div>
+		</header>
+	`;
+
+	return header;
+}
+
 async function generateBody(postContent) {
 	let bodyContent = await generateBodyContent(postContent);
 
@@ -83,9 +134,10 @@ async function generateBodyContent(postContent) {
 	let content = '';
 
 	if (postContent.text) {
+		// https://stackoverflow.com/questions/863779/how-to-add-line-breaks-to-an-html-textarea
 		content += `
 			<p class="post__text">
-				${postContent.text}
+				${sanitizeText(postContent.text)}
 			</p>
 		`;
 	}
@@ -114,32 +166,6 @@ function generatePostImg(fileImg) {
 	});
 }
 
-function generateHeader() {
-	// https://observablehq.com/@mbostock/date-formatting
-	let date = new Date(),
-		currentDate = date.toLocaleString(undefined, {
-			month: 'short',
-			day: '2-digit',
-			year: 'numeric',
-			hour: 'numeric',
-			minute: '2-digit',
-			hour12: true,
-		});
-
-	let header = `
-		<header class="post__header">
-			<img class="post__avatar" src="avatar.png" alt="" />
-
-			<div class="post__meta">
-				<p class="post__user"></p>
-				<time class="post__time" datetime="">${currentDate}</time>
-			</div>
-		</header>
-	`;
-
-	return header;
-}
-
 function generateFooter() {
 	let footer = `
 		<footer class="post__footer">
@@ -163,42 +189,28 @@ function generateFooter() {
 	return footer;
 }
 
-function handleAddImg(e) {
-	const file = e.target.files[0];
-
-	if (isValidImage(file)) {
-		generateImgPreview(file);
-	}
+/* Sanitization functions  */
+function sanitizeText(text) {
+	// https://remarkablemark.org/blog/2019/11/29/javascript-sanitize-html/
+	var element = document.createElement('div');
+	element.innerText = text.trim();
+	return element.innerHTML;
 }
 
-function generateImgPreview(file) {
-	let reader = new FileReader(),
-		mediaContainer = document.querySelector('#create-post-media-wrap');
-
-	reader.readAsDataURL(file);
-	reader.onloadend = () => {
-		let preview = `
-			<figure class="create-post__media-item">
-				<button type="button" aria-label="delete image">
-					<img src="close.svg" alt="" />
-				</button>
-				<img src="${reader.result}" alt="" />
-			</figure>	
-		`;
-
-		mediaContainer.innerHTML = preview;
-
-		let closeBtn = mediaContainer.querySelector('button');
-		closeBtn.addEventListener('click', removeImg, false);
-	};
+/* Clean functions */
+function cleanCreatePost() {
+	createPostText.value = '';
+	removeCreatePostImg();
+	watchInputs();
 }
 
-function removeImg(e) {
-	e.currentTarget.parentElement.remove();
+function removeCreatePostImg() {
+	mediaContainer.innerHTML = '';
 	createPostMedia.value = '';
 	watchInputs();
 }
 
+/* Image validation images */
 function isValidImage(file) {
 	let isValid = isValidFileSize(file) && isValidFileSize(file);
 	return isValid;
