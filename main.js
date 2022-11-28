@@ -4,6 +4,7 @@ let createPostText = document.querySelector('#create-post-txt');
 let createPostSubmitBtn = document.querySelector('#create-post-submit-btn');
 let mediaLabel = document.querySelector('[for="create-post-media"]');
 let postsContainer = document.querySelector('#posts-container');
+let mediaContainer = document.querySelector('#create-post-media-wrap');
 
 mediaLabel.addEventListener('keypress', (e) => {
 	if (e.key === 'Enter') {
@@ -45,6 +46,7 @@ async function handleSubmit(e) {
 function cleanCreatePost() {
 	createPostText.value = '';
 	createPostMedia.value = '';
+	mediaContainer.innerHTML = '';
 	watchInputs();
 }
 
@@ -172,8 +174,7 @@ function handleAddImg(e) {
 }
 
 function generateImgPreview(file) {
-	let reader = new FileReader(),
-		mediaContainer = document.querySelector('#create-post-media-wrap');
+	let reader = new FileReader();
 
 	reader.readAsDataURL(file);
 	reader.onloadend = () => {
