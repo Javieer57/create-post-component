@@ -27,9 +27,7 @@ img {
 	padding: 20px 40px;
 	width: 95%;
 	max-width: 660px;
-	margin: 0 auto;
-	/*  */
-	margin-bottom: 100px;
+	margin: 50px auto;
 	display: flex;
 	gap: 20px;
 	align-items: start;
@@ -147,11 +145,17 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	color: #999999;
 }
 
+.post__body {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
 .post__text {
 	font-size: 16px;
 	color: #757a91;
 	line-height: 1.5;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 }
 
 .post__img {
