@@ -9,26 +9,48 @@
 	</head>
 	<body>
 		<section class="create-post">
-			<img class="create-post__avatar" src="avatar.png" alt="" />
+			<img class="create-post__avatar" src="/img/avatar-tumblr.png" alt="" />
 			<form id="create-post-form" class="create-post__form" action="">
 				<div class="create-post__text-wrap">
 					<textarea
 						aria-label="Write something about you..."
 						name="post-text"
 						id="create-post-txt"
-						onInput="this.parentNode.dataset.replicatedValue = this.value"
+						oninput="this.parentNode.dataset.replicatedValue = this.value"
 						placeholder="Write something about you..."
 					></textarea>
 				</div>
 
 				<div class="create-post__media-wrap" id="create-post-media-wrap"></div>
 
-				<div class="create-post__buttons-wrap">
-					<label aria-label="Add an image to the post" tabindex="0" class="create-post__opt-btn" for="create-post-media">
-						<img class="post__react-btn-icon" src="camera-outline.svg" alt="" />
-						Media
-						<input type="file" name="post-img" id="create-post-media" accept=".png, .jpg, .jpeg" />
-					</label>
+				<div class="create-post__buttons">
+					<div class="create-post__assets-buttons">
+						<button type="button" aria-label="Add an image to the post" class="create-post__asset-btn" for="create-post-media" onclick="this.querySelector('input').click()">
+							<img class="icon" src="/icons/camera-tumblr.svg" alt="" />
+							Photo
+							<input type="file" name="post-img" id="create-post-media" accept=".png, .jpg, .jpeg" />
+						</button>
+						<button type="button" aria-label="Add a video to the post" class="create-post__asset-btn" for="create-post-media" disabled>
+							<img class="icon" src="/icons/quote-tumblr.svg" alt="" />
+							Video
+						</button>
+						<button type="button" aria-label="Add a video to the post" class="create-post__asset-btn" for="create-post-media" disabled>
+							<img class="icon" src="/icons/link-tumblr.svg" alt="" />
+							Link
+						</button>
+						<button type="button" aria-label="Add a video to the post" class="create-post__asset-btn" for="create-post-media" disabled>
+							<img class="icon" src="/icons/chat-tumblr.svg" alt="" />
+							Chat
+						</button>
+						<button type="button" aria-label="Add a video to the post" class="create-post__asset-btn" for="create-post-media" disabled>
+							<img class="icon" src="/icons/audio-tumblr.svg" alt="" />
+							Audio
+						</button>
+						<button type="button" aria-label="Add a video to the post" class="create-post__asset-btn" for="create-post-media" disabled>
+							<img class="icon" src="/icons/video-tumblr.svg" alt="" />
+							Video
+						</button>
+					</div>
 					<button class="create-post__submit" type="submit" disabled id="create-post-submit-btn">Publish</button>
 				</div>
 			</form>
@@ -57,15 +79,15 @@
 				<footer class="post__footer">
 					<div class="post__footer-wrapper">
 						<button class="post__react-btn">
-							<img class="post__react-btn-icon" src="thumb-up-outline.svg" alt="" />
+							<img class="btn-icon" src="thumb-up-outline.svg" alt="" />
 							React
 						</button>
 						<button class="post__react-btn">
-							<img class="post__react-btn-icon" src="comment-multiple-outline.svg" alt="" />
+							<img class="btn-icon" src="comment-multiple-outline.svg" alt="" />
 							Comment
 						</button>
 						<button class="post__react-btn">
-							<img class="post__react-btn-icon" src="share-outline.svg" alt="" />
+							<img class="btn-icon" src="share-outline.svg" alt="" />
 							Share
 						</button>
 					</div>

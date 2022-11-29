@@ -12,7 +12,7 @@
 }
 
 body {
-	background-color: #f4f4f4;
+	background-color: #385774;
 	font-family: var(--primary-font);
 	font-size: 100%;
 }
@@ -23,24 +23,39 @@ img {
 
 /* Create post */
 .create-post {
-	background-color: #fff;
-	padding: 20px 40px;
 	width: 95%;
 	max-width: 660px;
 	margin: 50px auto;
 	display: flex;
 	gap: 20px;
-	align-items: start;
 }
 
 .create-post__avatar {
-	max-width: 40px;
-	min-height: 40px;
+	width: 65px;
+	height: 65px;
+	border-radius: 5px;
 }
 
 .create-post__form {
-	display: inline-block;
+	background-color: #fff;
+	padding: 20px;
 	width: 100%;
+	position: relative;
+	border-radius: 5px;
+}
+
+.create-post__form::after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -19px;
+	right: auto;
+	top: 20px;
+	bottom: auto;
+	border: 10px solid;
+	border-color: transparent;
+	border-right-color: #fff;
 }
 
 /* Dynamic height for text-area:
@@ -101,13 +116,20 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	width: 100%;
 }
 
-#create-post-media {
-	display: none;
+.create-post__buttons {
+	display: flex;
+	gap: 40px;
+	justify-content: space-between;
 }
 
-.create-post__buttons-wrap {
-	display: flex;
-	justify-content: space-between;
+.create-post__assets-buttons {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+}
+
+#create-post-media {
+	display: none;
 }
 
 /* Post */
@@ -174,7 +196,7 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 
 /* Buttons */
 .post__react-btn,
-.create-post__opt-btn,
+/* .create-post__asset-btn, */
 .create-post__submit {
 	background: none;
 	display: inline-flex;
@@ -191,18 +213,44 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 }
 
 /* Apply styles to all icons */
-.post__react-btn-icon {
-	width: 18px;
-	height: 18px;
+.btn-icon {
+	max-width: 18px;
+	/* height: 18px; */
 	margin-right: 5px;
 }
 
-.create-post__opt-btn {
-	border: 1px solid rgba(100, 117, 137, 0.1);
+.create-post__asset-btn {
+	/* border: 1px solid rgba(100, 117, 137, 0.1); */
+	/* font-weight: 500; */
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
 	padding: 5px 15px;
-	color: #647589;
-	font-size: 12px;
-	font-weight: 500;
+	color: #51595e;
+	font-size: 16px;
+	gap: 10px;
+	background: none;
+	border: none;
+}
+
+.create-post__asset-btn:not(:last-child) {
+	border-right: 1px solid rgba(100, 117, 137, 0.2);
+}
+
+.create-post__asset-btn:disabled {
+	opacity: 0.3;
+}
+
+.create-post__asset-btn .icon {
+	transition: all 0.3s ease;
+	width: 40px;
+	height: 35px;
+}
+
+.create-post__asset-btn:not(:disabled):hover .icon,
+.create-post__asset-btn:not(:disabled):focus .icon {
+	transform: translateY(-3px);
 }
 
 .create-post__submit {
@@ -211,9 +259,10 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	border: none;
 	color: #fff;
 	font-family: inherit;
-	font-size: 12px;
-	font-weight: 500;
+	font-size: 16px;
 	padding: 5px 15px;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
 }
 
 .create-post__submit:disabled {
