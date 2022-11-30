@@ -28,7 +28,7 @@
 						<button type="button" aria-label="Add an image to the post" class="create-post__asset-btn" for="create-post-media" onclick="this.querySelector('input').click()">
 							<img class="icon" src="/icons/camera-tumblr.svg" alt="" />
 							Photo
-							<input type="file" name="post-img" id="create-post-media" accept=".png, .jpg, .jpeg" />
+							<input type="file" name="post-img" id="create-post-media" accept=".png, .jpg, .jpeg, .gif" />
 						</button>
 						<button type="button" aria-label="Add a video to the post" class="create-post__asset-btn" for="create-post-media" disabled>
 							<img class="icon" src="/icons/quote-tumblr.svg" alt="" />
@@ -58,6 +58,33 @@
 
 		<section id="posts-container">
 			<article class="post">
+				<img class="post__avatar" src="/img/avatar-tumblr.png" alt="" />
+
+				<div class="post__content">
+					<header class="post__header">
+						<p class="post__user">John Doe</p>
+
+						<div class="post__meta">
+							<p class="post__reblogs">3,908</p>
+
+							<button class="post__header-btn">
+								<img src="/icons/reblog-tumblr.svg" alt="" />
+							</button>
+							<button class="post__header-btn">
+								<img src="/icons/heart-tumblr.svg" alt="" />
+							</button>
+						</div>
+					</header>
+
+					<div class="post__body">
+						<img class="post__img" src="post-1.png" alt="" />
+						<p class="post__text">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam corrupti asperiores modi odio vero. Veritatis modi reiciendis quibusdam molestiae! Esse!
+						</p>
+					</div>
+				</div>
+			</article>
+			<!-- <article class="post">
 				<div class="post__wrapper">
 					<header class="post__header">
 						<img class="post__avatar" src="avatar.png" alt="John Doe" />
@@ -92,7 +119,7 @@
 						</button>
 					</div>
 				</footer>
-			</article>
+			</article> -->
 		</section>
 
 		<script src="main.js"></script>

@@ -137,34 +137,76 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	width: 95%;
 	max-width: 660px;
 	margin: 0 auto 40px;
-	background-color: #fff;
+	display: flex;
+	gap: 20px;
+}
+
+.post__avatar {
+	width: 65px;
+	height: 65px;
+	border-radius: 5px;
+}
+
+.post__content {
+	border-radius: 5px;
+	width: 100%;
+	padding: 20px;
+	position: relative;
+}
+
+.post__content::after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: -19px;
+	right: auto;
+	top: 20px;
+	bottom: auto;
+	border: 10px solid;
+	border-color: transparent;
+	border-right-color: #fff;
 }
 
 .post__header {
 	display: flex;
 	gap: 15px;
-	margin-bottom: 25px;
-}
-
-.post__avatar {
-	max-width: 40px;
-	min-height: 40px;
-}
-
-.post__wrapper {
-	padding: 20px 40px;
+	margin-bottom: 15px;
+	align-items: center;
+	font-family: var(--secondary-font);
+	justify-content: space-between;
 }
 
 .post__user {
-	font-family: var(--secondary-font);
 	font-weight: bold;
 	font-size: 14px;
-	color: #51595e;
+	color: #aeaeae;
 }
 
-.post__time {
+.post__meta {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.post__reblogs {
+	color: #fff;
 	font-size: 12px;
-	color: #999999;
+	font-weight: bold;
+	display: inline-block;
+	padding: 3px 5px;
+	background-color: #aeaeae;
+	border-radius: 5px;
+}
+
+.post__header-btn {
+	border: none;
+	background-color: transparent;
+	width: 20px;
+}
+
+.post__content {
+	background-color: #fff;
 }
 
 .post__body {

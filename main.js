@@ -80,11 +80,12 @@ async function createPost(postContent) {
 
 	let post = `
 		<article class="post">
-			<div class="post__wrapper">
+			<img class="post__avatar" src="/img/avatar-tumblr.png" alt="" />
+		
+			<div class="post__content">
 				${header}
 				${body}
 			</div>
-			${footer}
 		</article>
 	`;
 
@@ -92,24 +93,19 @@ async function createPost(postContent) {
 }
 
 function generateHeader() {
-	// https://observablehq.com/@mbostock/date-formatting
-	let date = new Date(),
-		currentDate = date.toLocaleString(undefined, {
-			month: 'short',
-			day: '2-digit',
-			year: 'numeric',
-			hour: 'numeric',
-			minute: '2-digit',
-			hour12: true,
-		});
-
 	let header = `
 		<header class="post__header">
-			<img class="post__avatar" src="avatar.png" alt="John Doe" />
+			<p class="post__user">John Doe</p>
 
 			<div class="post__meta">
-				<p class="post__user">John Doe</p>
-				<time class="post__time" datetime="">${currentDate}</time>
+				<p class="post__reblogs">3,908</p>
+
+				<button class="post__header-btn">
+					<img src="/icons/reblog-tumblr.svg" alt="" />
+				</button>
+				<button class="post__header-btn">
+					<img src="/icons/heart-tumblr.svg" alt="" />
+				</button>
 			</div>
 		</header>
 	`;
@@ -133,6 +129,10 @@ async function generateBodyContent(postContent) {
 	// https://benhoyt.com/writings/dont-sanitize-do-escape/
 	let content = '';
 
+	if (postContent.img) {
+		content += await generatePostImg(postContent.img);
+	}
+
 	if (postContent.text) {
 		// https://stackoverflow.com/questions/863779/how-to-add-line-breaks-to-an-html-textarea
 		content += `
@@ -140,10 +140,6 @@ async function generateBodyContent(postContent) {
 				${sanitizeText(postContent.text)}
 			</p>
 		`;
-	}
-
-	if (postContent.img) {
-		content += await generatePostImg(postContent.img);
 	}
 
 	return content;
@@ -217,7 +213,7 @@ function isValidImage(file) {
 }
 
 function isValidFileType(file) {
-	const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+	const fileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
 	return fileTypes.includes(file.type);
 }
 
