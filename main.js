@@ -36,7 +36,7 @@ function generateImgPreview(file) {
 		let preview = `
 			<figure class="create-post__media-item">
 				<button type="button" aria-label="delete image">
-					<img src="close.svg" alt="" />
+					<img src="/icons/close.svg" alt="" />
 				</button>
 				<img src="${reader.result}" alt="" />
 			</figure>	
@@ -52,9 +52,12 @@ function generateImgPreview(file) {
 function handleAddImg(e) {
 	const file = e.target.files[0];
 
-	if (isValidImage(file)) {
-		generateImgPreview(file);
+	if (!isValidImage(file)) {
+		createPostMedia.value = '';
+		return;
 	}
+
+	generateImgPreview(file);
 }
 
 watchInputs();
@@ -85,6 +88,7 @@ async function createPost(postContent) {
 			<div class="post__content">
 				${header}
 				${body}
+				${footer}
 			</div>
 		</article>
 	`;
@@ -95,7 +99,7 @@ async function createPost(postContent) {
 function generateHeader() {
 	let header = `
 		<header class="post__header">
-			<p class="post__user">John Doe</p>
+			<p class="post__user">galactiqangel</p>
 
 			<div class="post__meta">
 				<p class="post__reblogs">3,908</p>
@@ -164,22 +168,11 @@ function generatePostImg(fileImg) {
 
 function generateFooter() {
 	let footer = `
-		<footer class="post__footer">
-			<div class="post__footer-wrapper">
-				<button class="post__react-btn">
-					<img class="post__react-btn-icon" src="thumb-up-outline.svg" alt="" />
-					React
-				</button>
-				<button class="post__react-btn">
-					<img class="post__react-btn-icon" src="comment-multiple-outline.svg" alt="" />
-					Comment
-				</button>
-				<button class="post__react-btn">
-					<img class="post__react-btn-icon" src="share-outline.svg" alt="" />
-					Share
-				</button>
-			</div>
-		</footer>
+	<div class="post__footer">
+		<span>#2010s</span>
+		<span>#tumblr</span>
+		<span>#codepen</span>
+	</div>
 	`;
 
 	return footer;
@@ -218,5 +211,8 @@ function isValidFileType(file) {
 }
 
 function isValidFileSize(file) {
+	if (file.size > 1048576) {
+		alert('Please upload an image smaller than 1MB');
+	}
 	return file.size < 1048576;
 }

@@ -178,7 +178,7 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 }
 
 .post__user {
-	font-weight: bold;
+	font-weight: 600;
 	font-size: 14px;
 	color: #aeaeae;
 }
@@ -210,14 +210,15 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 }
 
 .post__body {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr;
 	gap: 20px;
+	margin-bottom: 15px;
 }
 
 .post__text {
 	font-size: 16px;
-	color: #757a91;
+	color: #000;
 	line-height: 1.5;
 }
 
@@ -226,19 +227,11 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 }
 
 .post__footer {
-	border-top: 1px solid #edf7fb;
-	background-color: rgba(237, 247, 251, 25%);
-}
-
-.post__footer-wrapper {
-	padding: 15px 40px;
-	display: grid;
-	grid-template-columns: repeat(3, auto);
+	color: #aeaeae;
+	font-size: 14px;
 }
 
 /* Buttons */
-.post__react-btn,
-/* .create-post__asset-btn, */
 .create-post__submit {
 	background: none;
 	display: inline-flex;
@@ -246,27 +239,9 @@ https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/ */
 	justify-content: center;
 }
 
-.post__react-btn {
-	font-family: var(--secondary-font);
-	border: none;
-	color: #647589;
-	font-weight: 500;
-	font-size: 14px;
-}
-
-/* Apply styles to all icons */
-.btn-icon {
-	max-width: 18px;
-	/* height: 18px; */
-	margin-right: 5px;
-}
-
 .create-post__asset-btn {
-	/* border: 1px solid rgba(100, 117, 137, 0.1); */
-	/* font-weight: 500; */
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
 	padding: 5px 15px;
 	color: #51595e;
